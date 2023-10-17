@@ -2,38 +2,34 @@ import { screen } from '@testing-library/react';
 import renderWithRouter from '../renderWithRouter';
 import { About } from '../pages';
 
-describe('testa componente <About.tsx />', () => {
-  test('Testa se a página contém as informações sobre a Pokédex', () => {
-    renderWithRouter(<About />);
+test('Testa se a página contém as informações sobre a Pokédex', () => {
+  renderWithRouter(<About />);
+  const pokedexInfo = screen.getByText('What does this app do?');
+  expect(pokedexInfo).toBeInTheDocument();
+});
 
-    const pokedexInfo = screen.getByText('What does this app do?');
+test('Testa se a página contém um heading h2 com o texto About Pokédex', () => {
+  renderWithRouter(<About />);
 
-    expect(pokedexInfo).toBeInTheDocument();
-  });
+  const title = screen.getByRole('heading', { level: 2 });
 
-  test('Testa se a página contém um heading h2 com o texto About Pokédex', () => {
-    renderWithRouter(<About />);
+  expect(title).toBeInTheDocument();
+});
 
-    const title = screen.getByRole('heading', { level: 2 });
+test('Testa se a página contém dois parágrafos com texto sobre a Pokédex', () => {
+  renderWithRouter(<About />);
 
-    expect(title).toBeInTheDocument();
-  });
+  const paragraphOne = screen.getByText('This application simulates a Pokédex, a digital encyclopedia containing all Pokémon.');
+  const paragrpgTwo = screen.getByText('One can filter Pokémon by type, and see more details for each one of them.');
 
-  test('Testa se a página contém dois parágrafos com texto sobre a Pokédex', () => {
-    renderWithRouter(<About />);
+  expect(paragraphOne).toBeInTheDocument();
+  expect(paragrpgTwo).toBeInTheDocument();
+});
 
-    const paragraphOne = screen.getByText('This application simulates a Pokédex, a digital encyclopedia containing all Pokémon.');
-    const paragrpgTwo = screen.getByText('One can filter Pokémon by type, and see more details for each one of them.');
+test('Testa se a página contém a imagem correta', () => {
+  renderWithRouter(<About />);
 
-    expect(paragraphOne).toBeInTheDocument();
-    expect(paragrpgTwo).toBeInTheDocument();
-  });
+  const pokedexImage = screen.getByAltText(/Pokédex/);
 
-  test('Testa se a página contém a imagem correta', () => {
-    renderWithRouter(<About />);
-
-    const pokedexImage = screen.getByAltText(/Pokédex/);
-
-    expect(pokedexImage).toBeInTheDocument();
-  });
+  expect(pokedexImage).toBeInTheDocument();
 });
