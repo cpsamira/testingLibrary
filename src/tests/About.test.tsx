@@ -4,6 +4,7 @@ import { About } from '../pages';
 
 test('Testa se a página contém as informações sobre a Pokédex', () => {
   renderWithRouter(<About />);
+
   const pokedexInfo = screen.getByText('What does this app do?');
   expect(pokedexInfo).toBeInTheDocument();
 });
@@ -13,7 +14,7 @@ test('Testa se a página contém um heading h2 com o texto About Pokédex', () =
 
   const title = screen.getByRole('heading', { level: 2 });
 
-  expect(title).toBeInTheDocument();
+  expect(title).toHaveTextContent('About Pokédex');
 });
 
 test('Testa se a página contém dois parágrafos com texto sobre a Pokédex', () => {
@@ -32,4 +33,8 @@ test('Testa se a página contém a imagem correta', () => {
   const pokedexImage = screen.getByAltText(/Pokédex/);
 
   expect(pokedexImage).toBeInTheDocument();
+  expect(pokedexImage).toHaveAttribute(
+    'src',
+    'https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png',
+  );
 });
